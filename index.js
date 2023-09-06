@@ -2,7 +2,7 @@ import Tree from "./tree.js";
 import Node from "./node.js";
 import { prettyPrint } from "./pretty-print.js";
 
-export const buildTree = (array, start, end) => {
+export const buildTree = (array, start = 0, end = array.length - 1) => {
   if (start > end) return null;
 
   const mid = parseInt((start + end) / 2);
@@ -14,6 +14,12 @@ export const buildTree = (array, start, end) => {
   return node;
 };
 
-const array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const array = [1, 2, 3, 4, 5, 6, 8, 9, 10];
 const tree = new Tree(array);
 prettyPrint(tree.root);
+tree.insert(0);
+tree.insert(100);
+tree.insert(10);
+tree.insert(7);
+prettyPrint(tree.root);
+console.log(tree.find(101));
