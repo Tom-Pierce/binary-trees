@@ -1,4 +1,4 @@
-import { buildTree } from "./index.js";
+import { buildTree } from "./build-tree.js";
 import Node from "./node.js";
 
 export default class Tree {
@@ -110,7 +110,7 @@ export default class Tree {
     }
     return false;
   }
-  rebalance(){
+  rebalance() {
     this.root = buildTree(this.inorder());
   }
   #nextMinValue(node) {
