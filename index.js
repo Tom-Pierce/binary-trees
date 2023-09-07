@@ -14,17 +14,26 @@ export const buildTree = (array, start = 0, end = array.length - 1) => {
   return node;
 };
 
-const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const array = Array.from({ length: 100 }, () =>
+  Math.floor(Math.random() * 100)
+);
 const tree = new Tree(array);
-prettyPrint(tree.root);
-// tree.insert(0);
-// tree.insert(100);
-// tree.insert(10);
-// tree.insert(7);
-prettyPrint(tree.root);
-console.log(tree.find(1));
+console.log("Balanced tree: ", tree.isBalanced());
 console.log("Level order traversal: ", tree.levelOrder());
-console.log("Inorder traversal: ", tree.inorder());
 console.log("Preorder traversal: ", tree.preorder());
 console.log("Postorder traversal: ", tree.postorder());
-console.log("Height: ", tree.height());
+console.log("Inorder traversal: ", tree.inorder());
+tree.insert(109);
+tree.insert(432);
+tree.insert(912);
+tree.insert(176);
+tree.insert(287);
+console.log("Balanced tree: ", tree.isBalanced());
+tree.rebalance();
+console.log("Balanced tree: ", tree.isBalanced());
+tree.insert(109);
+tree.insert(432);
+tree.insert(912);
+tree.insert(176);
+tree.insert(287);
+prettyPrint(tree.root);

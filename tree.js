@@ -40,7 +40,7 @@ export default class Tree {
   }
 
   find(data, node = this.root) {
-    if (node == null) return `Tree does not contain "${data}"`;
+    if (node == null) return false;
     if (data === node.data) return node;
 
     if (data < node.data) return this.find(data, node.left);
@@ -65,15 +65,15 @@ export default class Tree {
     return arr;
   }
 
-  preorder(arr = [], node = this.root){
-    if(node === null) return;
+  preorder(arr = [], node = this.root) {
+    if (node === null) return;
     arr.push(node.data);
-    if(node.left) this.preorder(arr, node.left);
-    if(node.right) this.preorder(arr, node.right);
+    if (node.left) this.preorder(arr, node.left);
+    if (node.right) this.preorder(arr, node.right);
     return arr;
   }
 
-  postorder(arr = [], node = this.root){
+  postorder(arr = [], node = this.root) {
     if (node === null) return;
     if (node.left) this.postorder(arr, node.left);
     if (node.right) this.postorder(arr, node.right);
@@ -81,13 +81,38 @@ export default class Tree {
     return arr;
   }
 
-  height(node = this.root) {
+  height(node) {
     if (node === null) return 0;
     const leftHeight = this.height(node.left);
     const rightHeight = this.height(node.right);
     return Math.max(leftHeight, rightHeight) + 1;
   }
 
+  depth(node) {
+    let counter = 0;
+    let root = this.root;
+    while (node.data !== root.data) {
+      if (node.data < root.data) {
+        root = root.left;
+        counter++;
+      } else {
+        root = root.right;
+        counter++;
+      }
+    }
+    return counter;
+  }
+  isBalanced(root = this.root) {
+    if (!root) return true;
+    if (Math.abs(this.height(root.left) - this.height(root.right)) <= 1) {
+      if (this.isBalanced(root.left) && this.isBalanced(root.right))
+        return true;
+    }
+    return false;
+  }
+  rebalance(){
+    this.root = buildTree(this.inorder());
+  }
   #nextMinValue(node) {
     let minValue = node.data;
     while (node.left) {
